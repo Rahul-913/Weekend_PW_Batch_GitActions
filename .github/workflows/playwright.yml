@@ -1,0 +1,41 @@
+name: ShoppersStack Playwright Automation
+# When should this workflow execute?
+on:
+push:
+pull_request:
+workflow_dispatch:
+# What jobs should execute?
+jobs:
+playwright-tests:
+# GitHub provides an Ubuntu machine
+runs-on: ubuntu-latest
+steps:
+# Step 1: Download the GitHub repository
+- name: Checkout Repository
+uses: actions/checkout@v6
+# Step 2: Install Node.js
+- name: Setup Node.js
+uses: actions/setup-node@v6
+with:
+node-version: 22
+# Step 3: Install project dependencies
+- name: Install Dependencies
+run: npm ci
+# Step 4: Install Playwright browsers
+- name: Install Playwright Browsers
+run: npx playwright install --with-deps
+# Step 5: Execute automation tests
+- name: Run Playwright Tests
+run: npx playwright test
+env: qaUsn: ${{ secrets.QA_USN }}
+qaPsw: ${{ secrets.QA_PSW }}
+# Step 6: Upload execution reports
+- name: Upload Playwright Reports
+if: always()
+uses: actions/upload-artifact@v5
+with:
+name: playwright-test-results
+path: |playwright-report/
+test-results/
+allure-results/
+retention-days: 15

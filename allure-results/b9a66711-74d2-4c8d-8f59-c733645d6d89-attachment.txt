@@ -1,0 +1,2 @@
+The login page url is https://shoppersstack.com/user-signin
+https://shoppersstack.com/user-signin

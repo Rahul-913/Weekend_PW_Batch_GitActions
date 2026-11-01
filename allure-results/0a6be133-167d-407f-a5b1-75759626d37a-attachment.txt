@@ -1,0 +1,3 @@
+{ admin: 'user', admin123: 'user123' }
+{ admin: 'abc', admin123: 'abc123' }
+{ admin: 'xyz', admin123: 'xyz123' }
